@@ -69,6 +69,51 @@ printEventsRange(start, end) {
 }
 
 //NEXT
+    printEventsFromOneMonth(month){
+        const newEvents = this.events.filter(function(event){
+        if(event.date.includes(month)) {
+            return true;
+        } else {
+            return false;
+        };
+    })
+        if (newEvents.length === 0) {
+            console.log("No result")
+        } else {
+            newEvents.forEach(function(event){
+            console.log(event)
+        });
+    }
+};
+
+
+    addNewEntry(newDate, entry) {
+        let newEntry = { date: newDate, remark: entry };
+        this.events.push(newEntry);
+        console.log("New entry added!", newDate, entry);
+}
+
+    editRemark(date, newEntry) {
+        const newEvents = this.events.map(p => p.date === date ? {
+        ...p, remark: newEntry } : p);
+        console.log("The remark was successfully edited!", date, newEntry);
+}
+
+    editDate(oldDateEntry, newDateEntry) {
+        const newEvents = this.events.map(p => p.date === oldDateEntry ? {
+        ...p, date: newDateEntry } : p);
+        console.log("The date was successfully edited!", newDateEntry);
+}
+
+    deleteEvent(date) {
+        for (let i = 0; i < this.events.length; i++) {
+            const element = this.events[i];
+            if (element.date === date) {
+                console.log("The event was successfully deleted!", this.events[i]);
+                this.events.splice(i, 1);
+        };
+    };
+};
 }
 
 let events = new SearchDiary([
@@ -1217,11 +1262,17 @@ let events = new SearchDiary([
 
 ]) 
 
-//events.printRemarkFromOneDay("July 31,1983")
-//events.printYearDatesEntries(events)
-//events.printEventsRange("July 23,1983", "July 26,1983")
-//events.getEntry()
-//events.printRemarkFromOneDay("July 16,1983")
-//events.wordSearch("you")
-//events.longestWordSearch();
+events.printRemarkFromOneDay("July 31,1983")
+events.printYearDatesEntries(events)
+events.printEventsRange("July 23,1983", "July 26,1983")
+events.getEntry()
+events.printRemarkFromOneDay("July 16,1983")
+events.wordSearch("you")
+events.longestWordSearch();
+events.printEventsFromOneMonth("June");
+events.addNewEntry("January 12,1983", "this is a new entry");
+events.printRemarkFromOneDay("January 12,1983");
+events.editRemark("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
+events.editDate("January 4,1983", "February 18,1983");
+events.deleteEvent("April 10,1983");
 
