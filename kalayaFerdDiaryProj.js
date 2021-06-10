@@ -1195,6 +1195,26 @@ function wordSearch(wordToSearch) {
 }
 wordSearch("Mary")
 
+// // JOEL SOLUTION !
+function wordSearch(wordToSearch) {
+    let searchFor = wordToSearch;
+    const newEvents = events.filter(function(event){
+        if(event.remark.includes(searchFor)) {
+            return true;
+        } else {
+            return false;
+        };
+    })
+    if (newEvents.length === 0) {
+        console.log(`Somehow she did not use the word,' ${searchFor}'`)
+    } else {
+        newEvents.forEach(function(event){
+            console.log(event)
+        })
+    }
+};
+wordSearch("you");
+
 // - SEARCH FOR longest word (longest) = done
 
 function longestWordSearch(str) {
@@ -1215,6 +1235,22 @@ longestWordSearch();
 // KALAYA
 
 // - PRINTS DATE AND REMARKS OF THE ALL MONTH
+ main
+function printEventsFromOneMonth(month){
+    const newEvents = events.filter(function(event){
+        if(event.date.includes(month)) {
+        return true;
+     } else{
+         return false;
+     };
+    })
+    if (newEvents.length === 0) {
+        console.log("No result")
+    } else {
+        newEvents.forEach(function(event){
+            console.log(event)
+        })
+=======
 function printEventsFromOneMonth(month) {
     for (let i = 0; i < events.length; i++) {
         const element = events[i];
@@ -1222,8 +1258,8 @@ function printEventsFromOneMonth(month) {
             console.log(element);
         };
 
+main
     }
-
 };
 printEventsFromOneMonth("June");
 
