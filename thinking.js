@@ -39,36 +39,21 @@ let events =
  ]
 
 let month = new Date("July 22,1983").toLocaleDateString()
-// let result = events.reduce((acc,b,c,d)=>{
-//     month=b
-//     events.date=b
-//     events.remark=acc
-//   console.log(month)
-// })
 
-//  for (let index = 0; index < events.length; index++) {
-//     const element = events[index];
-//     //console.log(element)
-//    //console.log(`On ${element.date}, Mary wrote: ${element.remark}`)
- 
-//    if (month=element.date) {console.log(element.remark)
-       
-//   } else {console.log(`Nothing was recorded on $[element.date]`)
-       
-//   }
-    
-// } 
-/* function eventsTrailer() {
-    if (events.date = month) {
-        console.log(`Mary's diary entry on ${
-            month
-        } was ${
-            JSON.stringify(events.remark, 2)
-        }`)
+function printAll(){
 
-    } else {
-        console.log("Check other dates")
+    for (let index = 0; index < events.length; index++) {
+        let activities = events[index];
+        //console.log(activities)
+        //console.log(moon)
+        
     }
 }
-eventsTrailer() */
+printAll()
+
+function oneDayPrint(acts) {
+    acts = new Date("July 22,1983").toLocaleDateString()
  
+ }
+ oneDayPrint()
+

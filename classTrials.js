@@ -7,12 +7,14 @@ class SearchDiary{
    getEntry(){
     const entry = this.events[0]
     console.log(`DATE: ${entry.date}, REMARKS ${entry.remark}`)
+    console.log(`entry is: ${entry.remark}`)
    } 
     printRemarkFromOneDay(stringDate) {
     for (let i = 0; i < this.events.length; i++) {
         const element = this.events[i];
         if (element.date === stringDate) {
             console.log(`On ${stringDate},the remark is: ${element.remark}`)
+           
         }
     }
 }
@@ -32,22 +34,41 @@ printEventsRange(start, end) {
 
 //NEXT
 // SEARCH events containing a key word = done
- wordSearch(wordToSearch) {
-    let searchFor = wordToSearch
-    for (let i = 0; i < this.events.length; i++) {
-        const element = this.events[i]
-        const entry = element.remark
-        const dayEntered = element.date
-        if (entry.includes(searchFor) === true) {
-            console.log(dayEntered, entry)
+  wordSearch(wordToSearch) {
+    let searchFor = wordToSearch;
+    const newEvents = this.events.filter(function(event){
+        if(event.remark.includes(searchFor)) {
+            return true;
         } else {
-            console.log(`Somehow she did not use the word,' ${searchFor}'`)
-        }
-        break
+            return false;
+        };
+    })
+    if (newEvents.length === 0) {
+        console.log(`Somehow she did not use the word,' ${searchFor}'`)
+    } else {
+        newEvents.forEach(function(event){
+            console.log(event)
+        })
     }
-}
-wordSearch("Mary")
+};
+
 // NEXT
+// - SEARCH FOR longest word (longest) = done
+
+ longestWordSearch(str) {
+
+    for (let xy = 0; xy < this.events.length; xy++) {
+        const element = this.events[xy];
+        str = element.remark
+    }
+    const longestWord = str.split(' ').reduce(function (longest, currentWord) {
+        return currentWord.length > longest.length ? currentWord : longest;
+    }, "");
+    const result = longestWord.length;
+    console.log(`Longest word: '${longestWord}'; Character length: ${result}`)
+}
+
+//NEXT
 }
 
 let events = new SearchDiary([
@@ -233,97 +254,97 @@ let events = new SearchDiary([
         date: 'February 28,1983',
         remark: 'Continue To dare to love deeply And risk everything For the good thing Continue'
     }, {
-        date: 'Mars 1,1983',
+        date: 'March 1,1983',
         remark: 'All this time I drank you like the cure when maybe you were the poison.'
     }, {
-        date: 'Mars 2,1983',
+        date: 'March 2,1983',
         remark: 'Five minutes are enough to dream a whole life, that is how relative time is.'
     }, {
-        date: 'Mars 3,1983',
+        date: 'March 3,1983',
         remark: "Out beyond ideas of wrongdoing and rightdoing there is a field. I'll meet you there."
     }, {
-        date: 'Mars 4,1983',
+        date: 'March 4,1983',
         remark: 'Twice I have lived forever in a smile'
     }, {
-        date: 'Mars 5,1983',
+        date: 'March 5,1983',
         remark: 'Go wisely and slowly. Those who rush stumble and fall.'
     }, {
-        date: 'Mars 6,1983',
+        date: 'March 6,1983',
         remark: 'For darkness restores what light cannot repair.'
     }, {
-        date: 'Mars 7,1983',
+        date: 'March 7,1983',
         remark: 'If you want me again look for me under your boot-soles.'
     }, {
-        date: 'Mars 8,1983',
+        date: 'March 8,1983',
         remark: 'I found god in myself and i loved her, i loved her fiercely'
     }, {
-        date: 'Mars 9,1983',
+        date: 'March 9,1983',
         remark: 'A truth should exist, it should not be used like this. If I love you is that a fact or a weapon?'
     }, {
-        date: 'Mars 10,1983',
+        date: 'March 10,1983',
         remark: 'Lovers find secret places inside this violent world where they make transactions with beauty.'
     }, {
-        date: 'Mars 11,1983',
+        date: 'March 11,1983',
         remark: 'Out of the quarrel with others we make rhetoric; out of the quarrel with ourselves we make poetry.'
     }, {
-        date: 'Mars 12,1983',
+        date: 'March 12,1983',
         remark: 'I am terrified by this dark thing That sleeps in me; All day I feel its soft, feathery turnings, its malignity.'
     }, {
-        date: 'Mars 13,1983',
+        date: 'March 13,1983',
         remark: 'We are made of all those who have built and broken us.'
     }, {
-        date: 'Mars 14,1983',
+        date: 'March 14,1983',
         remark: 'I too am not a bit tamed, I too am untranslatable, I sound my barbaric yawp over the roofs of the world.'
     }, {
-        date: 'Mars 15,1983',
+        date: 'March 15,1983',
         remark: 'To hide feelings when you are near crying is the secret of dignity.'
     }, {
-        date: 'Mars 16,1983',
+        date: 'March 16,1983',
         remark: "If we surrendered to earth's intelligence we could rise up rooted, like trees."
     }, {
-        date: 'Mars 17,1983',
+        date: 'March 17,1983',
         remark: 'Death is the easy part, the hard part is living and knowing you could be so much more then you’re willing to be.'
     }, {
-        date: 'Mars 18,1983',
+        date: 'March 18,1983',
         remark: 'Truth can never be told so as to be understood and not be believed.'
     }, {
-        date: 'Mars 19,1983',
+        date: 'March 19,1983',
         remark: 'Truth can never be told so as to be understood and not be believed.'
     }, {
-        date: 'Mars 20,1983',
+        date: 'March 20,1983',
         remark: "Unbeing dead isn't being alive."
     }, {
-        date: 'Mars 21,1983',
+        date: 'March 21,1983',
         remark: 'Only those who will risk going too far can possibly find out how far one can go.'
     }, {
-        date: 'Mars 22,1983',
+        date: 'March 22,1983',
         remark: 'To be a poet is a condition, not a profession.'
     }, {
-        date: 'Mars 23,1983',
+        date: 'March 23,1983',
         remark: 'Summer night, even the stars are whispering to each other'
     }, {
-        date: 'Mars 24,1983',
+        date: 'March 24,1983',
         remark: 'The poetry of the earth is never dead.'
     }, {
-        date: 'Mars 25,1983',
+        date: 'March 25,1983',
         remark: 'The purpose of life is to be defeated by greater and greater things.'
     }, {
-        date: 'Mars 26,1983',
+        date: 'March 26,1983',
         remark: 'We love the things we love for what they are.'
     }, {
-        date: 'Mars 27,1983',
+        date: 'March 27,1983',
         remark: 'Only the very weak-minded refuse to be influenced by literature and poetry.'
     }, {
-        date: 'Mars 28,1983',
+        date: 'March 28,1983',
         remark: 'Every poem should remind the reader that they are going to die.'
     }, {
-        date: 'Mars 29,1983',
+        date: 'March 29,1983',
         remark: 'I live not in dreams but in contemplation of a reality that is perhaps the future.'
     }, {
-        date: 'Mars 30,1983',
+        date: 'March 30,1983',
         remark: 'Poems are a hotline to our hearts, and we forget this emotional power at our peril.'
     }, {
-        date: 'Mars 31,1983',
+        date: 'March 31,1983',
         remark: 'My heart is lost; the beasts have eaten it.'
     }, {
         date: 'April 1,1983',
@@ -1198,5 +1219,9 @@ let events = new SearchDiary([
 
 //events.printRemarkFromOneDay("July 31,1983")
 //events.printYearDatesEntries(events)
-events.printEventsRange("July 23,1983", "July 26,1983")
+//events.printEventsRange("July 23,1983", "July 26,1983")
 //events.getEntry()
+//events.printRemarkFromOneDay("July 16,1983")
+//events.wordSearch("you")
+//events.longestWordSearch();
+
