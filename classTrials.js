@@ -1,8 +1,25 @@
-// DIARYPROJECT
+class SearchDiary{
 
-// - DATABASE: Contains array of objects to be explored
-// -DATABASE ENDS
-let events = [
+    constructor(events){
+        this.events= events;
+               
+    }
+   getEntry(){
+    const entry = this.events[0]
+    console.log(`entry is: ${entry.remark}`)
+   } 
+    printRemarkFromOneDay(stringDate) {
+    for (let i = 0; i < this.events.length; i++) {
+        const element = this.events[i];
+        if (element.date === stringDate) {
+            console.log(element.remark)
+        }
+    }
+}
+//NEXT
+}
+
+let events = new SearchDiary([
 
     {
         date: 'January 1,1983',
@@ -1146,229 +1163,7 @@ let events = [
         remark: "If you can fill the unforgiving minute"
     },
 
-]
+]) 
 
-
-// - PROGRAMMING BEGINS
-// FUNCTION takes in a date and prints its entry
-function printRemarkFromOneDay(stringDate) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date === stringDate) {
-            console.log(element.remark)
-        }
-    }
-}
-printRemarkFromOneDay("July 23,1983");
-
-// -PROGRAM prints the whole years dates and corresponding entries
-for (let index = 0; index < events.length; index++) {
-    const element = events[index];
-    console.log("On", element.date, " SHE WROTE:", element.remark)
-}
-
-// - Function that prints out dates and entries for a given month
-// ( )
-
-// - print events between two dates (me) =done
-function printEventsRange(start, end) {
-    const rangeEvents = events.filter(events => (events.date >= start && events.date <= end))
-    console.log(rangeEvents)
-
-}
-printEventsRange("July 23,1983", "July 26,1983")
-// SEARCH events containing a key word = done
-
-function wordSearch(wordToSearch) {
-    let searchFor = wordToSearch
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i]
-        const entry = element.remark
-        const dayEntered = element.date
-        if (entry.includes(searchFor) === true) {
-            console.log(dayEntered, entry)
-        } else {
-            console.log(`Somehow she did not use the word,' ${searchFor}'`)
-        }
-        break
-    }
-}
-wordSearch("Mary")
-
-// // JOEL SOLUTION !
-function wordSearch(wordToSearch) {
-    let searchFor = wordToSearch;
-    const newEvents = events.filter(function(event){
-        if(event.remark.includes(searchFor)) {
-            return true;
-        } else {
-            return false;
-        };
-    })
-    if (newEvents.length === 0) {
-        console.log(`Somehow she did not use the word,' ${searchFor}'`)
-    } else {
-        newEvents.forEach(function(event){
-            console.log(event)
-        })
-    }
-};
-wordSearch("you");
-
-// - SEARCH FOR longest word (longest) = done
-
-function longestWordSearch(str) {
-
-    for (let xy = 0; xy < events.length; xy++) {
-        const element = events[xy];
-        str = element.remark
-    }
-    const longestWord = str.split(' ').reduce(function (longest, currentWord) {
-        return currentWord.length > longest.length ? currentWord : longest;
-    }, "");
-    const result = longestWord.length;
-    console.log(`Longest word: '${longestWord}'; Character length: ${result}`)
-}
-longestWordSearch();
-
-
-// KALAYA
-
-// - PRINTS DATE AND REMARKS OF THE ALL MONTH
- main
-function printEventsFromOneMonth(month){
-    const newEvents = events.filter(function(event){
-        if(event.date.includes(month)) {
-        return true;
-     } else{
-         return false;
-     };
-    })
-    if (newEvents.length === 0) {
-        console.log("No result")
-    } else {
-        newEvents.forEach(function(event){
-            console.log(event)
-        })
-=======
-function printEventsFromOneMonth(month) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date.includes(month)) {
-            console.log(element);
-        };
-
-main
-    }
-};
-printEventsFromOneMonth("June");
-
-
-// - ADD NEW ENTRIES
-function addNewEntry(newDate, entry) {
-    let newEntry = {
-        date: newDate,
-        remark: entry
-    };
-    events.push(newEntry);
-    console.log("New entry added!")
-}
-
-addNewEntry("July 27,1983", "this is a new entry");
-// console.log(events);
-
-
-// - EDIT A REMARK BY DATE
-function editRemarks(date, newentry) {
-    const newEvents = events.map(p => p.date === date ? {
-        ...p,
-        remark: newentry
-    } : p);
-    // console.log(newEvents);
-    console.log("remark was successfully edited!");
-}
-
-editRemarks("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
-
-
-// - EDIT THE DATE OF AN ENTRY
-function editDate(oldDateEntry, newDateEntry) {
-    const newEvents = events.map(p => p.date === oldDateEntry ? {
-        ...p,
-        date: newDateEntry
-    } : p);
-    // console.log(newEvents);
-    console.log("The date was successfully edited!");
-};
-
-editDate("January 4,1983", "February 18,1983");
-
-
-// - DELETE AN ENTRY BY DATE
-function deleteEvent(date) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date === date) {
-            events.splice(i, 1);
-            console.log("The event was deleted!");
-        };
-    };
-};
-
-deleteEvent("April 10,1983");
-// console.log(events);
-
-
-// - SEARCH word with highest frequency
-
-const charsTemp = {};
-function highestFreq(arr) {
-    for (let iterator = 0; iterator < events.length; iterator++) {
-        const element = events[iterator];
-        strOnCount = element.remark
-        const arr = strOnCount.split(" ");
-
-        let moFre = arr[0],
-            maxRekon = 0,
-            i,
-            j;
-        let len = arr.length;
-        for (i = 0; i < len; i++) {
-            let count = 0;
-            for (j = i + 1; j < len; j++) {
-                if (arr[i] == arr[j]) {
-                    count++;
-
-                }
-                // console.log("THIS IS THE ", j)
-            }
-            if (maxRekon < count) {
-                maxRekon = count;
-                moFre = arr[i];
-
-            }
-        }
-        return moFre;
-    }
-}
-console.log(`The word with the highest frequency is: ${
-    highestFreq()
-}`)
-
-
-// WORD COUNTER 2
-const charsTemp2 = {};
-for (let iterator = 0; iterator < events.length; iterator++) {
-    const element = events[iterator];
-    strOnCount = element.remark
-    const arr = strOnCount.split(" ");
-    for (let word of arr) {
-        if (! charsTemp2[word]) {
-            charsTemp2[word] = 1;
-        } else {
-            charsTemp2[word]++;
-        }
-    }
-}
-
-console.log(charsTemp2)
+  events.printRemarkFromOneDay("July 30,1983")
+events.getEntry()
