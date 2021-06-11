@@ -1,8 +1,197 @@
-// DIARYPROJECT
+class SearchDiary {
 
-// - DATABASE: Contains array of objects to be explored
-// -DATABASE ENDS
-let events = [
+    constructor(events) {
+        this.events = events;
+
+    }
+    getEntry() {
+        const entry = this.events[0]
+        console.log(`DATE: ${
+            entry.date
+        }, REMARKS ${
+            entry.remark
+        }`)
+        
+    }
+    printRemarkFromOneDay(stringDate) {
+        for (let i = 0; i < this.events.length; i++) {
+            const element = this.events[i];
+            if (element.date === stringDate) {
+                console.log(`On ${stringDate},the remark is: ${
+                    element.remark
+                }`)
+
+            }
+        }
+    }
+    // NEXT
+    printYearDatesEntries() {
+        for (let index = 0; index < this.events.length; index++) {
+            const element = this.events[index];
+            console.log("On", element.date, " SHE WROTE:", element.remark)
+        }
+    }
+    // NEXT
+    printEventsRange(start, end) {
+        const rangeEvents = this.events.filter(events => (events.date >= start && events.date<= end))
+    console.log(rangeEvents)
+
+}
+
+//NEXT
+// SEARCH events containing a key word = done
+  wordSearch(wordToSearch) {
+    let searchFor = wordToSearch;
+    const newEvents = this.events.filter(function(event){
+        if(event.remark.includes(searchFor)) {
+            return true;
+        } else {
+            return false;
+        };
+    })
+    if (newEvents.length === 0) {
+        console.log(`Somehow she did not use the word, ' ${searchFor}'`)
+    } else {
+        newEvents.forEach(function(event){
+            console.log(event)
+        })
+    }
+};
+
+// NEXT
+// - SEARCH FOR longest word (longest) = done
+
+ longestWordSearch(str) {
+
+    for (let xy = 0; xy < this.events.length; xy++) {
+        const element = this.events[xy];
+        str = element.remark
+    }
+    const longestWord = str.split(' ').reduce(function (longest, currentWord) {
+        return currentWord.length > longest.length ? currentWord : longest;
+    }, "");
+    const result = longestWord.length;
+    console.log(`Longest word: '${longestWord}'; Character length: ${result}`)
+}
+
+//NEXT
+    printEventsFromOneMonth(month){
+        const newEvents = this.events.filter(function(event){
+        if(event.date.includes(month)) {
+            return true;
+        } else {
+            return false;
+        };
+    })
+        if (newEvents.length === 0) {
+            console.log("No result")
+        } else {
+            newEvents.forEach(function(event){
+            console.log(event)
+        });
+    }
+};
+
+
+    addNewEntry(newDate, entry) {
+        let newEntry = { date: newDate, remark: entry };
+        this.events.push(newEntry);
+        console.log("New entry added!", newDate, entry);
+}
+
+    editRemark(date, newEntry) {
+        const newEvents = this.events.map(p => p.date === date ? {
+            ...p,
+            remark: newEntry
+        } : p);
+        console.log("The remark was successfully edited!", date, newEntry);
+    }
+
+    editDate(oldDateEntry, newDateEntry) {
+        const newEvents = this.events.map(p => p.date === oldDateEntry ? {
+            ...p,
+            date: newDateEntry
+        } : p);
+        console.log("The date was successfully edited!", newDateEntry);
+    }
+
+    deleteEvent(date) {
+        for (let i = 0; i < this.events.length; i++) {
+            const element = this.events[i];
+            if (element.date === date) {
+                console.log("The event was successfully deleted!", this.events[i]);
+                this.events.splice(i, 1);
+            };
+        };
+    };
+    wordCounter() {
+        const charsTemp = {};
+        for (let iterator = 0; iterator < this.events.length; iterator++) {
+            const element = this.events[iterator];
+            let strOnCount = element.remark
+            const arr = strOnCount.split(" ");
+            for (let word of arr) {
+                if (! charsTemp[word]) {
+                    charsTemp[word] = 1;
+                } else {
+                    charsTemp[word]++;
+                }
+
+            }
+
+
+        }
+        console.log(charsTemp)
+    }
+    // ====
+  highestFreqWord(){
+    let b = {};
+    let maxWord = '';
+    let maxFre = 0;
+    for (let iterator = 0; iterator < this.events.length; iterator++) {
+        let element = this.events[iterator];
+       let strOnCount = element.remark
+        const arr = strOnCount.split(" "); //convert every "remark" element to a string
+        for (let k of arr) { //counter and comparer
+            if (b[k]) 
+                b[k]++;
+             else 
+                b[k] = 1;
+            if (maxFre < b[k]) {
+                maxWord = k;
+                maxFre = b[k]
+            }
+        }
+    }
+    console.log(`The most frequent word is '${maxWord}'.It appears ${maxFre} times`)
+  }
+
+    // ====
+ randomDobMess (max){
+        let template = "";
+        let randStr = Math.floor((Math.random() * this.events.length));
+        let randStr1 = Math.floor((Math.random() * this.events.length));
+        
+        let dob = max, poetFerd = this.events[randStr].remark, poetKala = this.events[randStr1].remark
+           template = `FOR your DOB, '${dob}', know '${poetKala}', and as well '${poetFerd}' `
+            console.log(template)
+    }
+    
+    //===
+    inspirationalForToday(){
+        let template = "";
+let randStr = Math.floor((Math.random() * this.events.length));
+let date = new Date().toLocaleDateString();
+let time = new Date().toLocaleTimeString()
+let poetFerd = this.events[randStr].remark
+   template = `THOUGHTS to consider,today '${date}' at ${time}: '${poetFerd}' `
+    console.log(template) 
+    }
+    //===
+
+}
+
+let events = new SearchDiary([
 
     {
         date: 'January 1,1983',
@@ -185,97 +374,97 @@ let events = [
         date: 'February 28,1983',
         remark: 'Continue To dare to love deeply And risk everything For the good thing Continue'
     }, {
-        date: 'Mars 1,1983',
+        date: 'March 1,1983',
         remark: 'All this time I drank you like the cure when maybe you were the poison.'
     }, {
-        date: 'Mars 2,1983',
+        date: 'March 2,1983',
         remark: 'Five minutes are enough to dream a whole life, that is how relative time is.'
     }, {
-        date: 'Mars 3,1983',
+        date: 'March 3,1983',
         remark: "Out beyond ideas of wrongdoing and rightdoing there is a field. I'll meet you there."
     }, {
-        date: 'Mars 4,1983',
+        date: 'March 4,1983',
         remark: 'Twice I have lived forever in a smile'
     }, {
-        date: 'Mars 5,1983',
+        date: 'March 5,1983',
         remark: 'Go wisely and slowly. Those who rush stumble and fall.'
     }, {
-        date: 'Mars 6,1983',
+        date: 'March 6,1983',
         remark: 'For darkness restores what light cannot repair.'
     }, {
-        date: 'Mars 7,1983',
+        date: 'March 7,1983',
         remark: 'If you want me again look for me under your boot-soles.'
     }, {
-        date: 'Mars 8,1983',
+        date: 'March 8,1983',
         remark: 'I found god in myself and i loved her, i loved her fiercely'
     }, {
-        date: 'Mars 9,1983',
+        date: 'March 9,1983',
         remark: 'A truth should exist, it should not be used like this. If I love you is that a fact or a weapon?'
     }, {
-        date: 'Mars 10,1983',
+        date: 'March 10,1983',
         remark: 'Lovers find secret places inside this violent world where they make transactions with beauty.'
     }, {
-        date: 'Mars 11,1983',
+        date: 'March 11,1983',
         remark: 'Out of the quarrel with others we make rhetoric; out of the quarrel with ourselves we make poetry.'
     }, {
-        date: 'Mars 12,1983',
+        date: 'March 12,1983',
         remark: 'I am terrified by this dark thing That sleeps in me; All day I feel its soft, feathery turnings, its malignity.'
     }, {
-        date: 'Mars 13,1983',
+        date: 'March 13,1983',
         remark: 'We are made of all those who have built and broken us.'
     }, {
-        date: 'Mars 14,1983',
+        date: 'March 14,1983',
         remark: 'I too am not a bit tamed, I too am untranslatable, I sound my barbaric yawp over the roofs of the world.'
     }, {
-        date: 'Mars 15,1983',
+        date: 'March 15,1983',
         remark: 'To hide feelings when you are near crying is the secret of dignity.'
     }, {
-        date: 'Mars 16,1983',
+        date: 'March 16,1983',
         remark: "If we surrendered to earth's intelligence we could rise up rooted, like trees."
     }, {
-        date: 'Mars 17,1983',
+        date: 'March 17,1983',
         remark: 'Death is the easy part, the hard part is living and knowing you could be so much more then you’re willing to be.'
     }, {
-        date: 'Mars 18,1983',
+        date: 'March 18,1983',
         remark: 'Truth can never be told so as to be understood and not be believed.'
     }, {
-        date: 'Mars 19,1983',
+        date: 'March 19,1983',
         remark: 'Truth can never be told so as to be understood and not be believed.'
     }, {
-        date: 'Mars 20,1983',
+        date: 'March 20,1983',
         remark: "Unbeing dead isn't being alive."
     }, {
-        date: 'Mars 21,1983',
+        date: 'March 21,1983',
         remark: 'Only those who will risk going too far can possibly find out how far one can go.'
     }, {
-        date: 'Mars 22,1983',
+        date: 'March 22,1983',
         remark: 'To be a poet is a condition, not a profession.'
     }, {
-        date: 'Mars 23,1983',
+        date: 'March 23,1983',
         remark: 'Summer night, even the stars are whispering to each other'
     }, {
-        date: 'Mars 24,1983',
+        date: 'March 24,1983',
         remark: 'The poetry of the earth is never dead.'
     }, {
-        date: 'Mars 25,1983',
+        date: 'March 25,1983',
         remark: 'The purpose of life is to be defeated by greater and greater things.'
     }, {
-        date: 'Mars 26,1983',
+        date: 'March 26,1983',
         remark: 'We love the things we love for what they are.'
     }, {
-        date: 'Mars 27,1983',
+        date: 'March 27,1983',
         remark: 'Only the very weak-minded refuse to be influenced by literature and poetry.'
     }, {
-        date: 'Mars 28,1983',
+        date: 'March 28,1983',
         remark: 'Every poem should remind the reader that they are going to die.'
     }, {
-        date: 'Mars 29,1983',
+        date: 'March 29,1983',
         remark: 'I live not in dreams but in contemplation of a reality that is perhaps the future.'
     }, {
-        date: 'Mars 30,1983',
+        date: 'March 30,1983',
         remark: 'Poems are a hotline to our hearts, and we forget this emotional power at our peril.'
     }, {
-        date: 'Mars 31,1983',
+        date: 'March 31,1983',
         remark: 'My heart is lost; the beasts have eaten it.'
     }, {
         date: 'April 1,1983',
@@ -1146,229 +1335,23 @@ let events = [
         remark: "If you can fill the unforgiving minute"
     },
 
-]
+])
 
-
-// - PROGRAMMING BEGINS
-// FUNCTION takes in a date and prints its entry
-function printRemarkFromOneDay(stringDate) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date === stringDate) {
-            console.log(element.remark)
-        }
-    }
-}
-printRemarkFromOneDay("July 23,1983");
-
-// -PROGRAM prints the whole years dates and corresponding entries
-for (let index = 0; index < events.length; index++) {
-    const element = events[index];
-    console.log("On", element.date, " SHE WROTE:", element.remark)
-}
-
-// - Function that prints out dates and entries for a given month
-// ( )
-
-// - print events between two dates (me) =done
-function printEventsRange(start, end) {
-    const rangeEvents = events.filter(events => (events.date >= start && events.date <= end))
-    console.log(rangeEvents)
-
-}
-printEventsRange("July 23,1983", "July 26,1983")
-// SEARCH events containing a key word = done
-
-function wordSearch(wordToSearch) {
-    let searchFor = wordToSearch
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i]
-        const entry = element.remark
-        const dayEntered = element.date
-        if (entry.includes(searchFor) === true) {
-            console.log(dayEntered, entry)
-        } else {
-            console.log(`Somehow she did not use the word,' ${searchFor}'`)
-        }
-        break
-    }
-}
-wordSearch("Mary")
-
-// // JOEL SOLUTION !
-function wordSearch(wordToSearch) {
-    let searchFor = wordToSearch;
-    const newEvents = events.filter(function(event){
-        if(event.remark.includes(searchFor)) {
-            return true;
-        } else {
-            return false;
-        };
-    })
-    if (newEvents.length === 0) {
-        console.log(`Somehow she did not use the word,' ${searchFor}'`)
-    } else {
-        newEvents.forEach(function(event){
-            console.log(event)
-        })
-    }
-};
-wordSearch("you");
-
-// - SEARCH FOR longest word (longest) = done
-
-function longestWordSearch(str) {
-
-    for (let xy = 0; xy < events.length; xy++) {
-        const element = events[xy];
-        str = element.remark
-    }
-    const longestWord = str.split(' ').reduce(function (longest, currentWord) {
-        return currentWord.length > longest.length ? currentWord : longest;
-    }, "");
-    const result = longestWord.length;
-    console.log(`Longest word: '${longestWord}'; Character length: ${result}`)
-}
-longestWordSearch();
-
-
-// KALAYA
-
-// - PRINTS DATE AND REMARKS OF THE ALL MONTH
- main
-function printEventsFromOneMonth(month){
-    const newEvents = events.filter(function(event){
-        if(event.date.includes(month)) {
-        return true;
-     } else{
-         return false;
-     };
-    })
-    if (newEvents.length === 0) {
-        console.log("No result")
-    } else {
-        newEvents.forEach(function(event){
-            console.log(event)
-        })
-=======
-function printEventsFromOneMonth(month) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date.includes(month)) {
-            console.log(element);
-        };
-
-main
-    }
-};
-printEventsFromOneMonth("June");
-
-
-// - ADD NEW ENTRIES
-function addNewEntry(newDate, entry) {
-    let newEntry = {
-        date: newDate,
-        remark: entry
-    };
-    events.push(newEntry);
-    console.log("New entry added!")
-}
-
-addNewEntry("July 27,1983", "this is a new entry");
-// console.log(events);
-
-
-// - EDIT A REMARK BY DATE
-function editRemarks(date, newentry) {
-    const newEvents = events.map(p => p.date === date ? {
-        ...p,
-        remark: newentry
-    } : p);
-    // console.log(newEvents);
-    console.log("remark was successfully edited!");
-}
-
-editRemarks("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
-
-
-// - EDIT THE DATE OF AN ENTRY
-function editDate(oldDateEntry, newDateEntry) {
-    const newEvents = events.map(p => p.date === oldDateEntry ? {
-        ...p,
-        date: newDateEntry
-    } : p);
-    // console.log(newEvents);
-    console.log("The date was successfully edited!");
-};
-
-editDate("January 4,1983", "February 18,1983");
-
-
-// - DELETE AN ENTRY BY DATE
-function deleteEvent(date) {
-    for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        if (element.date === date) {
-            events.splice(i, 1);
-            console.log("The event was deleted!");
-        };
-    };
-};
-
-deleteEvent("April 10,1983");
-// console.log(events);
-
-
-// - SEARCH word with highest frequency
-
-const charsTemp = {};
-function highestFreq(arr) {
-    for (let iterator = 0; iterator < events.length; iterator++) {
-        const element = events[iterator];
-        strOnCount = element.remark
-        const arr = strOnCount.split(" ");
-
-        let moFre = arr[0],
-            maxRekon = 0,
-            i,
-            j;
-        let len = arr.length;
-        for (i = 0; i < len; i++) {
-            let count = 0;
-            for (j = i + 1; j < len; j++) {
-                if (arr[i] == arr[j]) {
-                    count++;
-
-                }
-                // console.log("THIS IS THE ", j)
-            }
-            if (maxRekon < count) {
-                maxRekon = count;
-                moFre = arr[i];
-
-            }
-        }
-        return moFre;
-    }
-}
-console.log(`The word with the highest frequency is: ${
-    highestFreq()
-}`)
-
-
-// WORD COUNTER 2
-const charsTemp2 = {};
-for (let iterator = 0; iterator < events.length; iterator++) {
-    const element = events[iterator];
-    strOnCount = element.remark
-    const arr = strOnCount.split(" ");
-    for (let word of arr) {
-        if (! charsTemp2[word]) {
-            charsTemp2[word] = 1;
-        } else {
-            charsTemp2[word]++;
-        }
-    }
-}
-
-console.log(charsTemp2)
+ //events.printRemarkFromOneDay("July 31,1983")
+ //events.printYearDatesEntries(events)
+// events.printEventsRange("July 23,1983", "July 26,1983")
+ //events.getEntry("July 20,1983")
+ //events.printRemarkFromOneDay("July 16,1983")
+ //events.wordSearch("tell")
+// events.longestWordSearch();
+// events.printEventsFromOneMonth("June");
+// events.addNewEntry("January 12,1983", "this is a new entry");
+// events.printRemarkFromOneDay("January 12,1983");
+// events.editRemark("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
+// events.editDate("January 4,1983", "February 18,1983");
+ //events.deleteEvent("April 10,1983");
+ //events.wordCounter() //prints a word cloud of words and their frequencies
+ events.highestFreqWord()
+//console.log("The highest occuring word is", events.highestFreq())
+//events.randomDobMess("12.12.1988")
+events.inspirationalForToday()

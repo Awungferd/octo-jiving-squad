@@ -1,10 +1,7 @@
-let animals=["leopard","lion","gazelle","goat","hippopo","rhino","boar","sivet"]
-
-// const animalObj = animals.reduce((x,y,)=>{// acc=init val, x =current position, y=counter
-//     let template = {id: "", name:"", status:""}
-// template.id= Math.random(0.5*1000)., template.name=y, template.status="Endangered!"
-//     console.log("This Object goes...",template)
-// }) 
+let animals=["leopard goat","lion hearted","gazelle gait","goat","hippopo","rhino","boar","sivet"]
+// const item = animals[Math.floor(Math.random() * animals.length)];
+// console.log(item)
+ 
 let template = {id:"", name:"",status:""}
 const animalia = animals.reduce((acc, current,counter,array)=>{
     template.name=current, template.id=counter;
@@ -17,3 +14,4 @@ const animalia = animals.reduce((acc, current,counter,array)=>{
 
 } ,"","")
 
+ 
