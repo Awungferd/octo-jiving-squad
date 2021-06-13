@@ -5,12 +5,18 @@ class SearchDiary {
 
     }
     getEntry() {
-        const entry = this.events[0]
-        console.log(`DATE: ${
-            entry.date
-        }, REMARKS ${
-            entry.remark
-        }`)
+        //const entry = this.events[0]
+        console.log(
+        `Greetings to everyone,
+        Our project set out to design a simple text mining program. Text mining here refers to the practice of using computational tools to analyze written texts.
+
+        As Wikipedia notes, “Text analysis involves information retrieval, lexical analysis to study word frequency distributions, pattern recognition, 
+        tagging/annotation,information extraction, data mining techniques including link and association analysis, visualization, and predictive analytics.”
+
+        For our project, we chose a fictional diary and tried to come up with meaningful algorithms that can help the user to interact with and understand the text.
+
+        Kalaya will show you some of the functions she wrote then I will come back again and show mine. Of course, your questions and suggestions are welcome.
+        `)
         
     }
     printRemarkFromOneDay(stringDate) {
@@ -127,8 +133,7 @@ class SearchDiary {
     wordCounter() {
         const charsTemp = {};
         for (let iterator = 0; iterator < this.events.length; iterator++) {
-            const element = this.events[iterator];
-            let strOnCount = element.remark
+            const strOnCount = this.events[iterator].remark;
             const arr = strOnCount.split(" ");
             for (let word of arr) {
                 if (! charsTemp[word]) {
@@ -1337,21 +1342,20 @@ let events = new SearchDiary([
 
 ])
 
- //events.printRemarkFromOneDay("July 31,1983")
- //events.printYearDatesEntries(events)
-// events.printEventsRange("July 23,1983", "July 26,1983")
- //events.getEntry("July 20,1983")
- //events.printRemarkFromOneDay("July 16,1983")
- //events.wordSearch("tell")
-// events.longestWordSearch();
-// events.printEventsFromOneMonth("June");
-// events.addNewEntry("January 12,1983", "this is a new entry");
-// events.printRemarkFromOneDay("January 12,1983");
-// events.editRemark("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
-// events.editDate("January 4,1983", "February 18,1983");
- //events.deleteEvent("April 10,1983");
- //events.wordCounter() //prints a word cloud of words and their frequencies
- events.highestFreqWord()
-//console.log("The highest occuring word is", events.highestFreq())
-//events.randomDobMess("12.12.1988")
-events.inspirationalForToday()
+//events.printYearDatesEntries(events)// Prints all events for a year: date and remarks
+// events.printEventsRange("July 23,1983", "July 26,1983") // Print events within a range
+//events.printRemarkFromOneDay("July 31,1983") // Print a given day's remarks
+//events.getEntry("July 20,1983") //Print single day event
+ //events.wordSearch("tell") //Word search
+ events.getEntry()
+//events.longestWordSearch(); //Search for longest word
+//events.printEventsFromOneMonth("December"); // Print a whole month
+//events.addNewEntry("January 12,1983", "this is a new entry"); //Add new entry
+ //events.printRemarkFromOneDay("January 12,1983"); //print remarks from one day
+ //events.editRemark("January 3,1983", "I have come to believe over and over again that what is most important to me must be spoken, made verbal and shared, even at the risk of having it bruised or misunderstood.");
+//events.editDate("January 4,1983", "February 18,1983"); //edit date
+//  events.deleteEvent("April 10,1983"); //delete an event
+ events.wordCounter() //prints cloud of words and their frequencies
+//events.highestFreqWord() //print the word with highest occurrence
+ //events.randomDobMess("12.12.1971") //Birthday Greetings
+ //events.inspirationalForToday()
